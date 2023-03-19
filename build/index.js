@@ -1,11 +1,7 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -41,9 +37,9 @@ const cheerio_1 = __importDefault(require("cheerio"));
 const axios_1 = __importDefault(require("axios"));
 const cors_1 = __importDefault(require("cors"));
 const fs_1 = __importDefault(require("fs"));
-const app = (0, express_1.default)();
-app.use((0, cors_1.default)());
-app.use((0, express_1.json)());
+const app = express_1.default();
+app.use(cors_1.default());
+app.use(express_1.json());
 const url = 'https://www.globalproductprices.com/rankings/egg_prices/';
 app.get('/', (req, res) => {
     res.json({ message: 'Please Like the Video!' });
@@ -51,7 +47,7 @@ app.get('/', (req, res) => {
 app.get('/csv', (req, res) => {
     const result = [];
     fs_1.default.createReadStream('./public/docs/eggs.csv')
-        .pipe((0, csv_parser_1.default)())
+        .pipe(csv_parser_1.default())
         .on('data', (data) => {
         result.push({
             date: data.DATE,
